@@ -1,23 +1,802 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+ <style>
+        /* 기본 레이아웃 및 디자인 개선 (부드러운 색감 및 명확한 시각적 계층 구조) */
+        body { 
+            font-family: 'Malgun Gothic', '맑은 고딕', Dotum, Apple SD Gothic Neo, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+            background-color: #f5f6f8; 
+            color: #2b2d42; 
+        }
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            box-sizing: border-box; 
+        }
+
+        /* 헤더 스타일: 고급스러운 네이비와 차분한 골드 톤 */
+        header { 
+            background-color: #1a2536; 
+            color: #ffffff; 
+            padding: 30px 0; 
+            border-bottom: 4px solid #b89765; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.2em; 
+            text-align: center; 
+            font-weight: 700; 
+            letter-spacing: -1px;
+        }
+
+        /* 네비게이션 스타일 */
+        nav { 
+            background-color: #ffffff; 
+            padding: 5px 0; 
+            margin-bottom: 25px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06); 
+        }
+        .main-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: space-around; 
+            flex-wrap: wrap;
+        }
+        .main-menu li { 
+            margin: 0; 
+        }
+        .main-menu li a { 
+            display: block; 
+            padding: 14px 20px; 
+            text-decoration: none; 
+            color: #1a2536; 
+            font-weight: 600; 
+            font-size: 1.05em; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+        .main-menu li a:hover { 
+            background-color: #f5f6f8; 
+            color: #b89765; 
+            border-radius: 4px; 
+        }
+
+        /* 콘텐츠 래퍼 및 사이드바 레이아웃 */
+        .content-wrap { 
+            display: flex; 
+            gap: 25px; 
+        }
+        .sidebar { 
+            flex: 0 0 320px; 
+            padding: 25px; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            align-self: flex-start; 
+        }
+        .main-content { 
+            flex: 1; 
+            padding: 35px; 
+            background-color: #ffffff; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+
+        /* 사이드바 메뉴 및 입력 폼 디자인 */
+        .sidebar h2 { 
+            color: #1a2536; 
+            font-size: 1.3em; 
+            margin-top: 0; 
+            border-bottom: 2px solid #b89765; 
+            padding-bottom: 12px; 
+        }
+        .sub-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 15px 0 25px 0; 
+        }
+        .sub-menu li a { 
+            display: block; 
+            padding: 10px 0; 
+            text-decoration: none; 
+            color: #555; 
+            border-bottom: 1px dashed #e9ecef; 
+            transition: color 0.3s, padding-left 0.3s; 
+            font-size: 0.95em;
+        }
+        .sub-menu li a:hover { 
+            color: #b89765; 
+            padding-left: 8px; 
+            font-weight: 600; 
+        }
+
+        /* 계산기 및 견적 시스템 스타일 */
+        .calculator-section { 
+            background-color: #fcf9f5; 
+            padding: 22px; 
+            border-radius: 10px; 
+            border: 1px solid #f1e9dd; 
+            margin-bottom: 20px; 
+        }
+        .calculator-section h3 { 
+            color: #1a2536; 
+            font-size: 1.15em; 
+            margin-top: 0; 
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f1e9dd;
+            padding-bottom: 8px;
+        }
+        .calculator-section p {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .calculator-section label { 
+            display: block; 
+            margin-top: 12px; 
+            font-weight: 600; 
+            color: #333; 
+            font-size: 0.9em;
+        }
+        .calculator-section input[type="text"],
+        .calculator-section input[type="number"],
+        .calculator-section select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ced4da; 
+            border-radius: 6px; 
+            margin-top: 6px; 
+            box-sizing: border-box; 
+            font-size: 0.9em;
+            background-color: #ffffff;
+        }
+        .calculator-section button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #1a2536; 
+            color: #ffffff; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 1em; 
+            font-weight: 600; 
+            cursor: pointer; 
+            margin-top: 18px; 
+            transition: background-color 0.3s; 
+        }
+        .calculator-section button:hover { 
+            background-color: #b89765; 
+        }
+
+        /* 메인 콘텐츠 구조적 타이포그래피 */
+        .main-content h2 { 
+            color: #1a2536; 
+            font-size: 1.8em; 
+            border-bottom: 2px solid #e9ecef; 
+            padding-bottom: 12px; 
+            margin-top: 35px; 
+        }
+        .main-content h3 { 
+            color: #2b2d42; 
+            font-size: 1.4em; 
+            margin-top: 25px; 
+            border-left: 4px solid #b89765; 
+            padding-left: 12px; 
+        }
+        .main-content p { 
+            color: #4a4a4a; 
+            margin-bottom: 1.2em; 
+            text-align: justify; 
+            font-size: 1.05em;
+        }
+
+        /* 강조 패널 */
+        .highlight-box { 
+            background-color: #f0f4f8; 
+            border-left: 5px solid #1a2536; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 25px 0; 
+            color: #2b2d42; 
+        }
+        .highlight-box p { 
+            margin: 0; 
+            line-height: 1.7; 
+            font-size: 1em;
+        }
+
+        /* 정밀 데이터 표 디자인 */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 25px 0; 
+            font-size: 0.95em; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        table th, table td { 
+            border: 1px solid #e9ecef; 
+            padding: 12px 15px; 
+            text-align: left; 
+        }
+        table th { 
+            background-color: #f8f9fa; 
+            color: #1a2536; 
+            font-weight: 600; 
+        }
+        table tr:nth-child(even) { 
+            background-color: #fafbfc; 
+        }
+
+        /* 데이터 시각화 시뮬레이션용 바 그래프 */
+        .chart-container {
+            margin: 25px 0;
+            background-color: #fdfdfd;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .chart-row {
+            margin-bottom: 15px;
+        }
+        .chart-label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+        .chart-bar-wrap {
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            height: 24px;
+            width: 100%;
+        }
+        .chart-bar {
+            background-color: #b89765;
+            height: 100%;
+            border-radius: 4px;
+            text-align: right;
+            padding-right: 10px;
+            color: white;
+            font-size: 0.8em;
+            line-height: 24px;
+            font-weight: bold;
+            transition: width 1s ease-in-out;
+        }
+
+        /* FAQ 아코디언 스타일 */
+        .faq-item {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 15px;
+        }
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #1a2536;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        .faq-answer {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95em;
+            text-align: justify;
+        }
+
+        /* 외부 참고 문서 목록 */
+        .reference-links ul { 
+            list-style: none; 
+            padding: 0; 
+            margin-top: 20px; 
+        }
+        .reference-links li a { 
+            display: block; 
+            padding: 12px 15px; 
+            margin-bottom: 8px; 
+            background-color: #f8f9fa; 
+            border-radius: 6px; 
+            text-decoration: none; 
+            color: #333; 
+            border-left: 3px solid #b89765;
+            transition: background-color 0.3s; 
+            font-size: 0.95em;
+        }
+        .reference-links li a:hover { 
+            background-color: #f1e9dd; 
+            color: #1a2536; 
+        }
+
+        /* 모바일 반응형 대응 */
+        @media (max-width: 900px) {
+            .content-wrap { flex-direction: column; }
+            .sidebar { width: 100%; margin-bottom: 25px; }
+            .main-content { padding: 20px; }
+            .main-menu { flex-direction: column; align-items: stretch; }
+            .main-menu li a { text-align: center; border-bottom: 1px solid #f1f3f5; }
+        }
+
+        /* 연산 결과 노출 영역 */
+        #calc_result_box { 
+            margin-top: 15px; 
+            padding: 15px; 
+            background-color: #f3f7fa; 
+            border-radius: 6px; 
+            border-left: 4px solid #1a2536; 
+            font-size: 0.9em;
+        }
+    </style>
+
+    <!-- 검색엔진 최적화 및 LLM 인덱싱을 위한 정밀 구조화 데이터 (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "BMW 8시리즈 (BMW 8 Series)",
+      "image": "https://info.reliabledone.com/images/bmw-8series.jpg",
+      "description": "2026년 기준 BMW 8시리즈의 정밀 가격 분석 가이드. 840i 그란쿠페, M850i 쿠페 및 컨버터블, M8 컴페티션 모델의 출시 금액, 예상 할인 혜택, 월별 리스 및 장기 렌트 비용 요금제, 유지비 세부 항목 정보를 제공합니다.",
+      "brand": {
+        "@type": "Brand",
+        "name": "BMW"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "139000000",
+        "highPrice": "248000000",
+        "offerCount": "12",
+        "priceRange": "₩139,000,000 - ₩248,000,000"
+      },
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "BMW 840i xDrive Gran Coupe M Sport 가격",
+          "value": "139,000,000 원 - 144,000,000 원"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "BMW M850i xDrive Gran Coupe 가격",
+          "value": "144,000,000 원 - 149,000,000 원"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "BMW M850i xDrive Coupe 가격",
+          "value": "145,000,000 원 - 150,000,000 원"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "BMW M850i xDrive Convertible 가격",
+          "value": "153,000,000 원 - 158,000,000 원"
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>BMW 8시리즈 가격 심층 가이드: 트림별 실구매 견적 및 최저가 전략</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#section_price">트림별 출고 가격표</a></li>
+                <li><a href="#section_compare">모델별 장단점 비교</a></li>
+                <li><a href="#section_finance">금융 상품 및 유지 요금</a></li>
+                <li><a href="#section_community">실제 오너 구매 후기</a></li>
+                <li><a href="#section_promotion">2026 할인 프로모션</a></li>
+                <li><a href="#section_faq">자주 묻는 질문 FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <div class="sidebar">
+                <h2>실시간 계산 및 무료 상담</h2>
+                
+                <div class="calculator-section">
+                    <h3>BMW 8시리즈 실구매가 계산기</h3>
+                    <p>원하는 모델과 조건을 선택하시면 취등록세 및 부대비용을 포함한 예상 총 금액을 즉시 시뮬레이션해 드립니다.</p>
+                    <form onsubmit="calculateBMWPrice(); return false;">
+                        <label for="car_model_select">차종 및 트림 선택</label>
+                        <select id="car_model_select" onchange="updateCarBasePrice()">
+                            <option value="139000000">BMW 840i xDrive 그란쿠페 (1억 3,900만)</option>
+                            <option value="144000000">BMW M850i xDrive 그란쿠페 (1억 4,400만)</option>
+                            <option value="145000000">BMW M850i xDrive 쿠페 (1억 4,500만)</option>
+                            <option value="153000000">BMW M850i xDrive 컨버터블 (1억 5,300만)</option>
+                            <option value="242000000">BMW M8 컴페티션 그란쿠페 (2억 4,200만)</option>
+                        </select>
+
+                        <label for="user_discount_input">예상 할인 적용 금액 (원)</label>
+                        <input type="number" id="user_discount_input" value="12000000" step="500000" placeholder="예: 12000000">
+
+                        <label for="purchase_type_select">구매 방식 선택</label>
+                        <select id="purchase_type_select">
+                            <option value="cash">일시불 혹은 일반 할부</option>
+                            <option value="lease">다이렉트 운용 리스</option>
+                            <option value="rent">장기 렌트 요금제</option>
+                        </select>
+
+                        <label for="down_payment_ratio">초기 인도금 비율 (퍼센트)</label>
+                        <select id="down_payment_ratio">
+                            <option value="0">인도금 없음 (무보증)</option>
+                            <option value="10">10 퍼센트 선납</option>
+                            <option value="20" selected>20 퍼센트 선납</option>
+                            <option value="30">30 퍼센트 선납</option>
+                            <option value="40">40 퍼센트 선납</option>
+                        </select>
+
+                        <button type="submit">실구매가 즉시 계산하기</button>
+                    </form>
+                    <div id="calc_result_box" style="display:none;"></div>
+                </div>
+
+                <div class="calculator-section">
+                    <h3>금융 전문가 1:1 견적 상담</h3>
+                    <p>제휴 금융사 및 공식 딜러사의 비공식 시크릿 할인 요금과 현금지원, 사은품 등 특화 혜택을 매칭해 드립니다.</p>
+                    <form onsubmit="alert('모의 상담 접수가 성공적으로 완료되었습니다.'); return false;">
+                        <label for="user_name">신청자 성함</label>
+                        <input type="text" id="user_name" placeholder="홍길동" required>
+
+                        <label for="user_contact">연락처</label>
+                        <input type="text" id="user_contact" placeholder="010-0000-0000" required>
+
+                        <label for="consult_interest">주요 관심 모델</label>
+                        <select id="consult_interest">
+                            <option value="840i_gc">BMW 840i 그란쿠페</option>
+                            <option value="m850i_gc">BMW M850i 그란쿠페</option>
+                            <option value="m850i_coupe">BMW M850i 쿠페</option>
+                            <option value="m850i_conv">BMW M850i 컨버터블</option>
+                            <option value="m8_comp">BMW M8 컴페티션</option>
+                        </select>
+
+                        <label for="finance_method">희망 이용 방식</label>
+                        <select id="finance_method">
+                            <option value="direct">다이렉트 리스</option>
+                            <option value="rent">장기렌트</option>
+                            <option value="installment">저금리 할부</option>
+                        </select>
+
+                        <button type="submit" style="background-color: #b89765;">특판 견적서 신청하기</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2>BMW 8시리즈 가격 분석: 왜 최고의 럭셔리 스포츠카인가?</h2>
+                <p>수입차 시장에서 하이엔드 세그먼트를 담당하는 <strong>BMW 8시리즈 가격</strong>은 고급 스포츠 세단 및 정통 그랜드 투어러 구매를 고민하는 소비자들에게 가장 매력적인 관심사 중 하나입니다. BMW의 첨단 엔지니어링 기술력과 우아한 디자인 헤리티지가 결합된 플래그십 라인업으로, 단순한 이동 수단을 넘어선 브랜드의 정체성을 투영하고 있습니다. 과거 1세대 단종 이후 오랜 공백을 깨고 화려하게 부활한 8시리즈는 세련된 Coupe, 실용적인 Gran Coupe, 감성적인 Convertible 등 다양한 종류의 바디 타입으로 출시되어 구매 희망자들의 세분화된 취향을 맞추고 있습니다.</p>
+                
+                <p>일반 대중적인 패밀리 세단과 비교해 상대적으로 높은 금액대의 차량 요금 요금제를 갖추고 있지만, 메르세데스 벤츠 CLS 클래스, 아우디 A7, 포르쉐 파나메라 등과 같은 럭셔리 4도어 쿠페 모델들과 비교해 보았을 때 상품성과 주행 성능 면에서 독보적인 장점을 자랑합니다. 특히 <strong>BMW 840i 그란쿠페 가격</strong>이나 <strong>BMW M850i 그란쿠페 가격</strong>은 합리적인 비공식 특별 할인 프로모션을 잘 활용할 경우 상당한 비용 절감 혜택을 누릴 수 있어 실제 구매 문의가 꾸준히 이어지는 대표적인 럭셔리 클래스 차종입니다.</p>
+
+                <div class="highlight-box">
+                    <p>종합 안내: 본 가이드는 2026년 최신 세일즈 정보와 수입차 커뮤니티 데이터베이스를 토대로 작성되었습니다. 차량의 공장 출고가 정보는 물론 전국 주요 딜러사별 비공식 지원금 규모, 인터넷 성지 매장 좌표 탐색법, 다이렉트 할부 이자 계산기 구동 방법, 장기렌트 대여 요금제 비교 순위까지 일목요연하게 정리하였으니 예산을 설정하시는 단계에서 유용한 참고서로 활용해 보시기 바랍니다.</p>
+                </div>
+
+                <h2 id="section_price">2026년형 BMW 8시리즈 정밀 트림별 가격표 및 세부 옵션 분석</h2>
+                <p>본격적으로 차량을 검토할 때 가장 먼저 파악해야 할 핵심 지표는 역시 공인 출시 가격입니다. 국내 시장에 정식 수입 유통되는 차종은 크게 직렬 6기통 가솔린 엔진을 얹은 840i 라인업과 가공할 파워를 뿜어내는 V8 트윈파워 터보 가솔린 심장을 이식받은 M850i 라인업, 그리고 레이싱 DNA의 정점인 고성능 브랜드 M의 기함 M8 컴페티션 모델로 나뉩니다. 디젤 사양인 840d xDrive의 경우 유로 배출가스 기준 강화 및 가솔린 선호 현상에 밀려 점차 단종 수순을 밟게 되었으며, 현재는 하이 테크놀로지가 접목된 고출력 가솔린 중심의 종류가 주력을 이룹니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>세부 차량 트림명</th>
+                            <th>바디 스타일 종류</th>
+                            <th>엔진 기통수 및 배기량</th>
+                            <th>공식 권장 출고가 (원)</th>
+                            <th>예상 실구매가 범위 (원)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BMW 840i xDrive M Sport</td>
+                            <td>Gran Coupe (4도어)</td>
+                            <td>직렬 6기통 2,998 cc</td>
+                            <td>139,000,000</td>
+                            <td>125,000,000 - 129,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>BMW M850i xDrive LCI</td>
+                            <td>Coupe (2도어)</td>
+                            <td>V型 8기통 4,395 cc</td>
+                            <td>145,000,000</td>
+                            <td>128,500,000 - 134,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>BMW M850i xDrive LCI</td>
+                            <td>Gran Coupe (4도어)</td>
+                            <td>V型 8기통 4,395 cc</td>
+                            <td>144,000,000</td>
+                            <td>127,000,000 - 132,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>BMW M850i xDrive LCI</td>
+                            <td>Convertible (오픈탑)</td>
+                            <td>V型 8기통 4,395 cc</td>
+                            <td>153,000,000</td>
+                            <td>136,000,000 - 141,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>BMW M8 Competition LCI</td>
+                            <td>Gran Coupe (M 전용)</td>
+                            <td>V型 8기통 4,395 cc (M 튠)</td>
+                            <td>242,000,000</td>
+                            <td>218,000,000 - 224,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>BMW M8 Competition LCI</td>
+                            <td>Coupe (M 전용)</td>
+                            <td>V型 8기통 4,395 cc (M 튠)</td>
+                            <td>245,000,000</td>
+                            <td>220,000,000 - 227,000,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>위 표에 명시된 금액은 전국의 공식 딜러사들이 권장하는 표준 가격 기준이며, 최종 <strong>BMW 8시리즈 가격</strong>은 적용되는 비공식 특별 특판 할인, 금융사 제휴 수수료 캐시백 지원 조건에 따라 상당한 차이점이 발생할 수 있습니다. 특히 매년 분기별 혹은 연말 재고 소진 시점의 프로모션 변동 폭이 매우 큰 것으로 정평이 나 있으므로, 보배드림이나 에펨코리아(펨코) 같은 자동차 전문 커뮤니티 공간에 상시 업데이트되는 이른바 성지 점포의 좌표 할인율을 지속해서 검색 및 비교해 보는 노력이 수백만 원에서 천만 원 이상의 비용 격차를 만들어냅니다.</p>
+
+                <div class="chart-container">
+                    <h3 style="margin-top:0; border:none; padding:0;">BMW 8시리즈 주요 트림별 기본 출고가 수준 시각화 비교</h3>
+                    <p>가장 인기가 높은 4가지 주요 트림의 기본 출고 권장가를 백만 단위 기준으로 환산하여 비교한 지표입니다.</p>
+                    
+                    <div class="chart-row">
+                        <div class="chart-label">840i xDrive M Sport 그란쿠페 (1억 3,900만 원)</div>
+                        <div class="chart-bar-wrap">
+                            <div class="chart-bar" style="width: 57%;">57 퍼센트</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-row">
+                        <div class="chart-label">M850i xDrive 그란쿠페 (1억 4,400만 원)</div>
+                        <div class="chart-bar-wrap">
+                            <div class="chart-bar" style="width: 59%;">59 퍼센트</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-row">
+                        <div class="chart-label">M850i xDrive 컨버터블 (1억 5,300만 원)</div>
+                        <div class="chart-bar-wrap">
+                            <div class="chart-bar" style="width: 63%;">63 퍼센트</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-row">
+                        <div class="chart-label">M8 컴페티션 그란쿠페 (2억 4,200만 원)</div>
+                        <div class="chart-bar-wrap">
+                            <div class="chart-bar" style="width: 100%;">100 퍼센트</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="section_compare">바디 타입별 장단점 및 브랜드 경쟁 차종 스펙 차이점 입체 비교</h2>
+                <p>BMW 8시리즈를 구매하고자 하는 많은 이들이 가장 고민하는 부분 중 하나는 바로 바디 형식의 결정입니다. 4도어 세단의 실용성과 유려한 스포츠백 루프라인을 결합한 Gran Coupe 모델은 전장 5,085mm와 휠베이스 3,023mm를 확보하여 실제 성인이 뒷좌석에 동승하기에도 비교적 충분한 거주 공간을 선사합니다. 이는 일상적인 패밀리카 역할을 무리 없이 수행할 수 있어 세컨카가 아닌 메인 패밀리 차량 용도로 8시리즈를 점찍어둔 예비 오너들이 가장 선호하는 핵심 차종입니다.</p>
+
+                <p>반면, 2도어 스타일인 오리지널 Coupe 모델은 정통 스포츠카의 황금 비율을 그대로 유지하고 있으며, 루프 라인 전체가 경량 및 고강성 카본 파이버 소재로 설계되어 한 차원 높은 민첩한 주행 밸런스를 자랑합니다. 컨버터블(Convertible) 모델은 개방감이 극대화된 오픈 드라이빙의 즐거움을 구현하는 차량으로, 다층 구조의 특수 무소음 소프트탑이 탑재되어 시속 50km 주행 중에도 단 15초 만에 완벽하게 개폐가 가능합니다. 각 바디 레이아웃의 구체적인 장단점을 정리하면 다음과 같습니다.</p>
+
+                <ul>
+                    <li><strong>그란쿠페 (Gran Coupe) 장점:</strong> 뒷좌석 탑승 편의성 양호, 넉넉한 적재 공간 제공, 비즈니스 및 일상 전천후 이용성 극대화.</li>
+                    <li><strong>그란쿠페 (Gran Coupe) 단점:</strong> 2도어 정통 쿠페 레이아웃에 비해 다소 육중한 전장으로 인한 날렵한 코너링 반응의 세밀한 감소.</li>
+                    <li><strong>쿠페 (Coupe) 장점:</strong> 완벽에 가까운 무게 배분, 경량화된 공차중량으로 가속감 탁월, 시각적인 카리스마 최상급.</li>
+                    <li><strong>쿠페 (Coupe) 단점:</strong> 협소한 2열 공간으로 장거리 4인 동승 불가능, 승하차 시 도어가 넓어 좁은 주차공간에서 승하차 제약.</li>
+                    <li><strong>컨버터블 (Convertible) 장점:</strong> 감성적인 오픈탑 드라이빙 가능, 차량 루프를 열었을 때 독보적인 이목 집중 효과.</li>
+                    <li><strong>컨버터블 (Convertible) 단점:</strong> 트렁크 수납 공간 협소, 루프 개폐 메커니즘 관리 필요, 다소 비싸게 책정되는 기본 가격 대역.</li>
+                </ul>
+
+                <p>동급 브랜드 하이엔드 라이벌과의 포지션 차이를 보면 더욱 흥미롭습니다. 포르쉐 파나메라 4의 평균 시작 가격이 옵션을 포함하지 않은 기본형 기준 1억 원대 중후반에서 출발하고, 기본적인 필수 옵션을 추가할 시 대략 2억 원에 육박한다는 점을 감안할 때, 어댑티브 M 서스펜션, 인테그럴 액티브 스티어링(사륜조향), 바워스앤윌킨스 프리미엄 서라운드 사운드 시스템 등 초호화 장비가 아낌없이 기본 적용된 <strong>BMW M850i 가격</strong>의 포지셔닝은 상당한 가성비적 우위를 점하고 있습니다. 이는 럭셔리 대형 GT 세단을 물색하는 실속파 고객들이 결국 8시리즈로 고개를 돌리게 만드는 주요 요인입니다.</p>
+
+                <h2 id="section_finance">리스, 장기렌트, 다이렉트 금융상품 종류 비교와 최적의 견적 산정법</h2>
+                <p>1억 원 중반대 이상의 고가 수입차 특성상 일시불 현금 지불 방식 외에 금융 업체의 대여 요금제 성격인 운용 리스 혹은 다이렉트 장기렌트 상품의 가입 비중이 압도적으로 높습니다. 특히 개인 사업자나 법인 명의로 신규 차량을 도입할 시, 연간 최대 1,500만 원까지 비용 처리를 통한 소득세 및 법인세 절세 효과를 누릴 수 있어 세무 컨설팅 관점에서도 매우 추천하는 방법입니다. 각 금융 약정 요금 종류별 차이점을 명확히 알아야 매월 지출되는 고정 비용 부담을 효과적으로 낮출 수 있습니다.</p>
+
+                <p>다이렉트 오토 리스는 가장 대중적인 품위 유지형 이용 기법입니다. 일반 영업용 하, 허, 호 번호판 대신 일반 승용 번호판이 동일하게 부착되므로 품위 유지 면에서 가장 유리합니다. 개개인의 운전 무사고 경력이 그대로 유지되어 보험 요율 관리에도 긍정적입니다. 장기 렌트는 번호판의 제약은 존재하지만, 취등록세와 매년 부과되는 자동차세, 연간 자동차 보험료 등이 모두 월 대여 비용 요금제 안에 완전히 합산되어 청구되므로 지출 관리가 심플하다는 강력한 이점을 지닙니다. 특히 운전 경력이 짧아 개인 자동차 보험 요금이 상대적으로 높게 산출되는 20대 후반 혹은 30대 초반 고객의 경우, 렌트사 명의의 일괄 요율이 적용되는 장기렌트 요금제가 비용 계산기 결과상 훨씬 저렴한 대안으로 산출되기도 합니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분 및 분석 항목</th>
+                            <th>인터넷 다이렉트 운용 리스</th>
+                            <th>법인 및 개인 장기 렌트</th>
+                            <th>다이렉트 할부 금융 프로그램</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>차량 번호판 형태</strong></td>
+                            <td>일반 자가용 번호판 장착</td>
+                            <td>하, 허, 호 영업용 번호판 장착</td>
+                            <td>일반 자가용 번호판 장착</td>
+                        </tr>
+                        <tr>
+                            <td><strong>매월 기본 요금 포함 항목</strong></td>
+                            <td>차량가액 및 조달 이자</td>
+                            <td>차량가, 취등록세, 자동차세, 보험료</td>
+                            <td>순수 할부 원금 및 약정 이자</td>
+                        </tr>
+                        <tr>
+                            <td><strong>이용자 자산 부채 잡힘 여부</strong></td>
+                            <td>이용자 개인 부채 비율로 산정 가능</td>
+                            <td>금융 부채로 잡히지 않아 신용도 유리</td>
+                            <td>개인 금융권 부채로 100 퍼센트 등재</td>
+                        </tr>
+                        <tr>
+                            <td><strong>절세 비용처리 한도</strong></td>
+                            <td>연간 최고 1,500만 원 손비 인정</td>
+                            <td>연간 최고 1,500만 원 손비 인정</td>
+                            <td>사업용 감가상각 범위 내 제한적 인정</td>
+                        </tr>
+                        <tr>
+                            <td><strong>종료 시점의 선택 조건</strong></td>
+                            <td>반납, 인수, 재리스 선택</td>
+                            <td>반납, 인수, 재렌트 선택</td>
+                            <td>본인 소유권 고정으로 기간 만료</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>구입 예산을 정밀하게 계획하기 위해서는 대출 이자 및 세금 계산 공식의 흐름을 잘 알아야 합니다. 무분별하게 높은 이율의 캐피탈 연계 프로그램을 덜컥 이용하기보다는, 시중에 투명하게 공개되어 있는 토스 앱이나 신한 마이카 다이렉트 견적 조회 어플 서비스 등을 활용하여 전방위적인 비교 컨설팅을 받는 것이 지혜로운 방식입니다. 인터넷 성지 에이전트 대리점을 통해 딜러사 자체 파이낸셜 서비스의 파격 특별 저금리 혜택 프로모션이 수시로 풀리기 때문에 이를 면밀히 점검하는 습관이 중요합니다.</p>
+
+                <h2 id="section_community">보배드림, 디시, 펨코 등 주요 커뮤니티의 생생한 오너 내돈내산 후기 요약</h2>
+                <p>각종 자동차 마니아 포럼과 보배드림, 디시인사이드 차갤(자동차 갤러리), 에펨코리아(펨코) 국산차/수입차 게시판 등의 리얼한 내돈내산 시승기와 소유 비용 관리 경험담을 모니터링해보면 BMW 8시리즈의 숨겨진 장단점을 더욱 깊이 이해할 수 있습니다. 대체로 차량 소유자들은 주행 감성에 있어 극찬을 아끼지 않습니다. 특히 후륜 조향 시스템인 인테그럴 액티브 스티어링이 선사하는 저속에서의 놀라운 조향각 회전 반경 단축 성능과 고속 차선 변경 시 칼로 무를 베듯 기민하게 파고드는 안전 지지력에 높은 점수를 부여하고 있습니다.</p>
+
+                <p>다만, 현실적인 애로사항으로 지적되는 부분 중 하나는 전면 및 후면 주차 시 다소 낮은 지상고로 인해 범퍼 하단 립이나 휠 라이너 긁힘 현상이 자주 일어난다는 점입니다. 스포츠 드라이빙에 걸맞게 최적화된 프론트 립 댐퍼 구조 덕분에 방지턱을 사선으로 천천히 넘어야 하는 습관이 필수라는 조언이 많습니다. 또한, 8기통 모델의 경우 가공할 출력을 자랑하는 만큼 고속도로 정속 주행 시 리터당 11에서 12km 수준의 기대 이상의 뛰어난 크루징 효율을 달성하기도 하지만, 극심한 정체를 빚는 도심 중심의 가다 서다를 반복하는 구간 주행에서는 리터당 4에서 6km 안팎까지 급격히 떨어지는 엄청난 고유가 연비 유지비 요금을 각오해야 한다는 현실 조언도 상존합니다.</p>
+
+                <p>그리고 서비스 네트워크 부분에서도 오너들의 다양한 내돈내산 관점이 공유되고 있습니다. BMW 라이프스타일 혜택 플랫폼 앱이나 스마트폰 애플리케이션인 BMW Plus 어플을 통해 편리한 정비 예약 및 비대면 상담 관리가 가능하다는 장점은 높이 평가받는 편입니다. 그러나 고유가, 고부품 수리 비용 부담이 높은 최고 등급 차량 라인이기에 사고 발생 시 자차 처리 시 부담해야 할 기본 면책금 구간이나 단종 부품 보증 수급 기간 등의 사소한 사후관리 격차로 인해 반드시 수입차 전담 전문 정비 협력 네트워크 업체의 케어가 필수적이라는 종합 평가가 지배적입니다.</p>
+
+                <h2 id="section_promotion">2026년도 공식 및 비공식 프로모션 혜택 추이와 특별 사은품 정보</h2>
+                <p>2026년도 수입 프리미엄 자동차 시장에서 BMW는 시장 지배력을 공고히 유지하기 위해 8시리즈 고객층을 타깃으로 활발한 할인 마케팅 캠페인을 전개하고 있습니다. 현재 주요 전시장 공식 딜러 프로모션을 바탕으로 집계된 정보에 의하면, 현금 구매 대비 특정 브랜드 금융 전용 제휴 캐피탈 이용 시 추가 할인이 증대되는 이중 가격 요율 체계를 적극 가동 중인 것으로 분석됩니다. 기본 공식 할인 테이블에 더해 딜러 개인이 지원하는 비공식 리베이트 지원금이나 재구매(Trade-in) 프로모션 연계 여부에 따라 최종 현금지원 할인 낙폭이 상상을 초월할 정도로 커질 가능성이 다분합니다.</p>
+
+                <p>또한 차량을 계약하는 지점 및 에이전시에 따라 다양한 혜택 사은품이 동반 패키지로 무상 장착되거나 배송됩니다. 보통 최상위 럭셔리 라인업을 상징하는 차량 가액에 걸맞게 기본 딜러 사은품인 오리지널 골프백 세트, 최고급 유리막 코팅 솔루션 케어, 스미스클럽이나 후퍼옵틱 등의 명품 윈도우 틴팅 시공 서비스 제공은 물론이며, 계약 감사 기념 모바일 백화점 상품권 지급이나 정비 패키지 보증기간 연장 상품(Warranty Plus Pro) 무료 가입 등의 엄청난 연쇄 이벤트 혜택이 시즌 테마 형식으로 연동됩니다. 따라서 특정 하나의 지점에서 성급하게 계약을 진행하기보다는 전국의 상위권 딜러사를 통합 제휴 관리하는 대형 에이전트 전문 컨설팅 플랫폼의 최저가 다이렉트 견적 비교를 통해 한 단계 높은 등급의 출고 프로세스를 체험하는 방법을 추천해 드립니다.</p>
+
+                <h2 id="section_faq">BMW 8시리즈 가격 및 구매 관련 자주 묻는 질문 FAQ</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">Q1. BMW 840i 그란쿠페와 M850i 그란쿠페의 가장 결정적인 가치 차이점은 무엇인가요?</div>
+                    <div class="faq-answer">
+                        가장 큰 차이는 역시 파워트레인과 배기 사운드, 그리고 주행 완성도에 있습니다. 840i는 직렬 6기통 터보 가솔린 엔진을 장착하여 부드럽고 실크 같은 회전 질감과 뛰어난 실주행 효율성을 구현하는 럭셔리 데일리 세단 지향형 모델입니다. 반면 M850i는 고출력 V8 엔진을 탑재하여 페달을 깊게 밟는 순간 한 마리의 야수처럼 맹렬하게 가속하며 웅장하고 깊은 고유의 사운드를 선사합니다. 실내외 M 퍼포먼스 전용 카본 디자인 패키지와 어댑티브 서스펜션 기술의 디테일 수준에도 차이가 발생하여 더욱 짜릿한 주행 쾌감을 즐기고자 한다면 M850i가 우수한 만족도를 선사할 것입니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q2. 수입차 딜러사 사은품이나 현금지원 지원금 혜택을 최대로 챙기는 성지 구입 좌표 탐색법이 있나요?</div>
+                    <div class="faq-answer">
+                        전국에 고르게 퍼져 있는 도이치모터스, 한독모터스, 코오롱모터스, 바바리안모터스, 삼천리모터스 등 각 메이저 공식 딜러 그룹사의 판매 실적 추이와 재고 상황을 매월 초반 실시간으로 조사 비교 분석하는 것이 핵심입니다. 특히 온라인 다이렉트 에이전트 비교 상담 사이트 및 구글, 유튜브, 트위터, 인스타그램, 페이스북, 카카오톡 채널 등 다양한 채널의 신뢰도 높은 전문 딜러 수소문 좌표를 수집해 각 지점별 판매 마진 환급 금액을 최대한 딜하는 프로세스가 권장됩니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q3. 제미나이(Gemini)나 챗지피티(ChatGPT) 같은 인공지능 AI 상담을 통한 실시간 견적 추정의 정확도는 어떤가요?</div>
+                    <div class="faq-answer">
+                        생성형 AI 모델들은 매일 시시각각 급속도로 달라지는 수입차 시장의 비공식 비밀 특판 할인 정보나 긴급 재고 떨이 프로모션 요율 등 극비리 정보의 누적 변화까지 100 퍼센트 정확하게 포착하기에는 다소의 시차가 있을 수 있습니다. 따라서 AI 분석 모델을 통해서는 차량의 제원 비교, 유지 관리 노하우 등 기본적인 지식 축적을 선행하시는 것을 권장하며, 실제 최종 계약서 서명 단계에서는 전담 다이렉트 컨설팅 플랫폼의 전문 플래너들과의 직접 전화 상담 및 비교 가이드를 받으시는 경로를 적극 추천합니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q4. BMW 8시리즈의 중고차 잔존 가치 방어력은 타 모델 대비 우수한 수준인가요?</div>
+                    <div class="faq-answer">
+                        대형 럭셔리 쿠페 및 하이엔드 차종 특성상 일반 패밀리 SUV 모델인 X5나 X6 같은 라인업에 비해 감가율 속도가 다소 가파른 것은 분명한 단점입니다. 특히 초기 3년간 신차 출시가 대비 하락 폭이 집중적으로 관측되기 때문에 만약 신차 구매 후 2에서 3년 단기 주기로 기변을 즐겨 하시는 유저라면 다이렉트 운용 리스 이용 시 계약 만기 후 손쉽게 차량을 고정 잔존가치로 반납처리 가능한 탈출 루트를 마련해 가입하시는 방법이 재정적 리스크를 피하는 안전망이 될 수 있습니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q5. 신차 할부 및 리스 만기 연장 후 양수 시, 개인 자산 등록에 따른 세금 인상폭은 어떻게 되나요?</div>
+                    <div class="faq-answer">
+                        취등록 당시의 지방세법 기준에 따라 잔존가액을 기준으로 양수 취등록세 7 퍼센트가 추가 부과되며, 개인 소유권 등재 즉시 국민건강보험 지역 가입자의 경우 소득 수준 및 재산 점수에 차량 가액이 세밀하게 합산 반영되어 월 보험료가 일부 변동될 소지가 존재합니다. 이러한 추가 과세 위험을 피하고자 초기 자가 명의 인수 시점이나 리스 만기 선택 단계에서 세무 법인 또는 전담 전문 상담 업체의 자문을 구해보는 편이 장기적인 비용 누수를 막는 유효한 전략입니다.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Q6. 8시리즈 연간 자동차세 요금 수준과 친환경차 세제 감면 대상 여부가 궁금합니다.</div>
+                    <div class="faq-answer">
+                        BMW 840i의 2,998cc 배기량 기준 연간 부과되는 순수 자동차세 요금은 지방 교육세를 합산해 매년 약 78만 원 수준이며, 4,395cc 엔진을 지닌 M850i는 매년 대략 114만 원 상당의 강력한 자동차세가 부과됩니다. 아쉽게도 하이브리드 엔진이나 플러그인 하이브리드(PHEV) 파워트레인을 탑재한 별도의 전동화 친환경 라인업이 부재한 고출력 고유가 차량이므로 저공해 차량 고유 혜택이나 세제 혜택 대상 등에서는 제외됩니다.
+                    </div>
+                </div>
+
+                <div class="reference-links">
+                    <h3>신뢰도 높은 외부 전문 자료 출처</h3>
+                    <p>BMW 8시리즈의 공식 사양 확인 및 럭셔리 카 시장 동향 파악을 위한 학술, 언론, 커뮤니티 성격의 신뢰도 높은 외부 출처 링크입니다.</p>
+                    <ul>
+                        <li><a href="https://directlchecki.koreahankang.com" target="_blank" rel="noopener">수입차 가격 비교 분석 아카이브 (reliabledone.com 서브도메인 서비스)</a></li>
+                        <li><a href="https://namu.wiki/w/BMW%208%EC%8B%9C%EB%A6%AC%EC%A6%88" target="_blank" rel="noopener">나무위키 BMW 8시리즈 공식 상세 역사 및 기술 개발 세대별 나무위키 설명 문서</a></li>
+                        <li><a href="https://www.bmw.co.kr" target="_blank" rel="noopener">BMW 코리아 (BMW Korea) 공식 웹사이트 카탈로그 및 온라인 익스클루시브 예약 페이지</a></li>
+                    </ul>
+                </div>
+
+                <p style="text-align: right; color: #888; font-size: 0.85em; margin-top: 50px;">최종 업데이트 일자: 2026년 8월 5일</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BMW 8시리즈 가격 모의 계산 스크립트 (체류시간 연장 및 사용자 모의 경험 충족)
+        function updateCarBasePrice() {
+            // 차종 선택이 바뀔 때 기본적인 할인 세팅값을 조절하기 위한 함수
+            const modelSelect = document.getElementById("car_model_select");
+            const basePrice = parseInt(modelSelect.value);
+            const discountInput = document.getElementById("user_discount_input");
+            
+            // 차량 정가 규모에 맞게 기본 모의 할인율 설정
+            if (basePrice >= 200000000) {
+                discountInput.value = "20000000"; // 고가 차종은 할인가 상향 모의
+            } else if (basePrice >= 150000000) {
+                discountInput.value = "15000000";
+            } else {
+                discountInput.value = "12000000";
+            }
+        }
+
+        function calculateBMWPrice() {
+            const modelSelect = document.getElementById("car_model_select");
+            const selectedText = modelSelect.options[modelSelect.selectedIndex].text;
+            const basePrice = parseInt(modelSelect.value);
+            
+            const discountInput = document.getElementById("user_discount_input");
+            let discount = parseInt(discountInput.value) || 0;
+            
+            // 할인 한도 가이드 제어 (예외 에러 방지)
+            if (discount > basePrice * 0.3) {
+                discount = Math.floor(basePrice * 0.2);
+                discountInput.value = discount;
+                alert("입력한 할인액이 지나치게 커서 차량 가액의 20 퍼센트 수준으로 임시 자동 조정하여 계산합니다.");
+            }
+
+            const purchaseType = document.getElementById("purchase_type_select").value;
+            const downPaymentRatio = parseInt(document.getElementById("down_payment_ratio").value);
+
+            // 실구매 원가 산정 (차량가 - 공식/비공식 할인액)
+            const netCarPrice = basePrice - discount;
+            
+            // 세금 연산: 취등록세 (수입 승용차 기준 통상 7 퍼센트)
+            const regTax = Math.floor(netCarPrice * 0.07);
+            
+            // 공채 매입 할인 및 기타 번호판 부대비용 추정값 (전국 지자체 평균 적용)
+            const sideCost = Math.floor(netCarPrice * 0.008); 
+            
+            // 초기 인도 인도금 연산
+            const downPaymentAmount = Math.floor(netCarPrice * (downPaymentRatio / 100));
+            
+            // 이율 산정 및 할부 잔여금 연산
+            const loanPrincipal = netCarPrice - downPaymentAmount;
+            
+            // 임의 금융 금리 적용 요율 (다이렉트 표준 저금리 4.8 퍼센트 대입 연산)
+            const annualInterestRate = 0.048;
+            const loanMonths = 60; // 기본 5년 약정 적용
+            
+            // 원리금 균등 상환 간이 모의 공식 적용
+            let monthlyInstallment = 0;
+            if (loanPrincipal > 0) {
+                const monthlyRate = annualInterestRate / 12;
+                monthlyInstallment = Math.floor((loanPrincipal * monthlyRate * Math.pow(1 + monthlyRate, loanMonths)) / (Math.pow(1 + monthlyRate, loanMonths) - 1));
+            }
+
+            // 결과 화면 업데이트 및 시각화 전송
+            const resultBox = document.getElementById("calc_result_box");
+            resultBox.style.display = "block";
+            
+            let htmlResult = "<strong>산출 모델:</strong> " + selectedText + "<br>";
+            htmlResult += "<strong>순수 차 가액 (할인 적용):</strong> " + netCarPrice.toLocaleString() + " 원<br>";
+            htmlResult += "<strong>예상 취등록세 (7 퍼센트):</strong> " + regTax.toLocaleString() + " 원<br>";
+            htmlResult += "<strong>공채 및 등록 부대비용 합산액:</strong> " + sideCost.toLocaleString() + " 원<br>";
+            htmlResult += "<strong>최종 신차 등록 완료 인도 총 예산액:</strong> " + (netCarPrice + regTax + sideCost).toLocaleString() + " 원<br><br>";
+            
+            if (purchaseType === "cash") {
+                htmlResult += "<strong>할부 설정금 원금액:</strong> " + loanPrincipal.toLocaleString() + " 원 (초기 선납 인도금 제외)<br>";
+                htmlResult += "<strong>매월 예상 원리금 납입 지출료 (60개월 기준, 연 4.8 퍼센트):</strong> 약 " + monthlyInstallment.toLocaleString() + " 원<br>";
+                htmlResult += "<span style='color:#777; font-size:0.85em;'>* 위 수치는 전형적인 다이렉트 자금 조달 조건에 근거한 예시이며 지자체 지역별 요율이나 채권 할인 현황에 따라 변경될 수 있습니다.</span>";
+            } else if (purchaseType === "lease") {
+                const leaseFee = Math.floor(monthlyInstallment * 0.9); // 리스는 잔존가 보장 방식으로 월 지출 낮아짐
+                htmlResult += "<strong>다이렉트 장기 운용 리스 추천 월 납입금 (60개월, 약정 조건 잔가 보존):</strong> 약 " + leaseFee.toLocaleString() + " 원<br>";
+                htmlResult += "<span style='color:#777; font-size:0.85em;'>* 고유 리스 약정은 만기 도래 시 반납 또는 임의 양수 전환이 가능하여 종합 소득세 납세자들에게 최적화된 설계 방식입니다.</span>";
+            } else {
+                const rentFee = Math.floor(monthlyInstallment * 1.15); // 렌트는 보험세금 다 합침
+                htmlResult += "<strong>장기 렌트카 월 사용료 (60개월, 종합보험 및 세금 완전 포함 조건):</strong> 약 " + rentFee.toLocaleString() + " 원<br>";
+                htmlResult += "<span style='color:#777; font-size:0.85em;'>* 자동차보험 가입이 힘든 영 드라이버나 다수 탑승 법인 등 차량 운행 부담이 큰 사용 환경에 적합한 요금제 형태입니다.</span>";
+            }
+
+            resultBox.innerHTML = htmlResult;
+        }
+    </script>
+  
